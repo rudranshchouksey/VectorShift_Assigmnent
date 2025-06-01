@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600&display=swap');
+
+:root {
+  /* Color Palette (inspired by the screenshot) */
+  --bg-gradient-start: #1A0C2B; /* Darker purple */
+  --bg-gradient-end: #0B0418;   /* Even darker, almost black */
+
+  --node-bg-color: #2E1C4E; /* Deep purple for nodes */
+  --node-border-color: rgba(140, 70, 200, 0.3); /* Faded purple border */
+  --node-text-color: #E0E0E0; /* Light text for nodes */
+  --node-header-bg: #22153A; /* Slightly different header bg */
+
+  --accent-color: #8A2BE2; /* BlueViolet for handles/glows */
+  --handle-bg-color: #8A2BE2; /* Handles */
+  --handle-border-color: #FFFFFF;
+
+  --toolbar-bg-color: #1A0C2B; /* Matches top background */
+  --toolbar-tab-text: #B0B0B0; /* Light grey for inactive tabs */
+  --toolbar-tab-active-bg: #2E1C4E; /* Darker bg for active tab */
+  --toolbar-tab-active-text: #FFFFFF; /* White for active tab text */
+
+  --submit-btn-bg: #4B0082; /* Indigo for button */
+  --submit-btn-hover-bg: #8A2BE2; /* BlueViolet on hover */
+
+  /* Shadows & Glows */
+  --shadow-node: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(138, 43, 226, 0.2);
+  --shadow-node-hover: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(138, 43, 226, 0.6);
+  --shadow-handle-glow: 0 0 12px var(--accent-color);
+  --shadow-button-glow: 0 0 15px var(--accent-color);
+
+  /* Border Radius */
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 20px; /* More rounded for nodes */
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  color: var(--node-text-color); /* Default text color is light */
+  min-height: 100vh;
+  overflow: hidden; /* Hide scrollbars, reactflow will handle it */
+}
+
+code {
+  font-family: 'Inter', monospace;
+}
+
+/* React Flow overrides for dark theme */
+.react-flow__handle {
+  background: var(--handle-bg-color);
+  border: 2px solid var(--handle-border-color);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  box-shadow: var(--shadow-handle-glow); /* Initial glow */
+}
+
+.react-flow__handle-left {
+  left: -8px;
+}
+
+.react-flow__handle-right {
+  right: -8px;
+}
+
+.react-flow__handle.react-flow__handle-valid {
+  background: var(--handle-bg-color); /* Stays glowing */
+  transform: scale(1.2);
+  box-shadow: 0 0 15px var(--accent-color); /* More intense glow on valid connection */
+}
+
+/* Dashed edges from the screenshot */
+.react-flow__edge-path,
+.react-flow__connection-path {
+  stroke: var(--accent-color);
+  stroke-width: 2;
+  stroke-dasharray: 5 5; /* Dashed line */
+  transition: stroke 0.2s ease-in-out;
+}
+
+/* React Flow Controls & MiniMap */
+.react-flow__controls {
+  background: rgba(0, 0, 0, 0.3); /* Semi-transparent dark background */
+  border-radius: var(--border-radius-sm);
+  border: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.react-flow__controls-button {
+  background: transparent !important; /* Remove default button bg */
+  border: none !important;
+  color: var(--node-text-color) !important; /* Light icons */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.react-flow__controls-button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important; /* Light hover */
+  color: var(--accent-color) !important; /* Accent color on hover */
+}
+
+.react-flow__minimap {
+  background: rgba(0, 0, 0, 0.5) !important; /* Darker, semi-transparent minimap */
+  border-radius: var(--border-radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: var(--shadow-md);
+}
+
+.react-flow__minimap-mask {
+  fill: rgba(0, 0, 0, 0.7) !important; /* Dark mask */
+}
+
+.react-flow__minimap-node {
+  fill: var(--node-bg-color) !important; /* Dark minimap nodes */
+  stroke: var(--accent-color) !important;
+}
+
+
+/* Node specific inputs/textareas for dark theme */
+.react-flow__node input[type="text"],
+.react-flow__node input[type="number"],
+.react-flow__node select,
+.react-flow__node textarea {
+  width: calc(100% - 20px); /* Account for padding */
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Light border */
+  border-radius: var(--border-radius-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--node-text-color);
+  background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent dark input */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.react-flow__node input[type="text"]:focus,
+.react-flow__node input[type="number"]:focus,
+.react-flow__node select:focus,
+.react-flow__node textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.4); /* Accent glow on focus */
+}
+
+.react-flow__node label {
+  display: block;
+  font-size: 13px;
+  color: var(--toolbar-tab-text); /* Slightly muted label color */
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+/* Custom styling for the "File" and "Upload File" text within nodes, as seen in image */
+.node-input-label {
+    font-size: 13px;
+    color: var(--toolbar-tab-text);
+    margin-top: 8px;
+    margin-bottom: 2px;
+}
+
+.node-action-text {
+    font-size: 14px;
+    color: var(--accent-color); /* Highlight upload file text */
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 5px;
+}
